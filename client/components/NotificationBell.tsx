@@ -2,7 +2,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
-import { apiFetch } from "@/lib/api";
+import { apiFetch } from "../lib/api";
+
 
 export default function NotificationBell() {
   const [count, setCount] = useState(0);
