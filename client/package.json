@@ -1,4 +1,3 @@
-
 {
   "name": "community-hub-client",
   "private": true,
@@ -12,5 +11,10 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "socket.io-client": "^4.7.2"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.3",
+    "@types/react": "^19.2.7",
+    "typescript": "^5.9.3"
   }
 }
