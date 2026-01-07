@@ -1,6 +1,6 @@
 
-import { apiFetch } from "@/lib/api";
-import PostCard from "@/components/PostCard";
+import PostCard from "../components/PostCard";
+import { apiFetch } from "../lib/api";
 
 export default async function Home() {
   const posts = await apiFetch("/api/posts").then(r => r.json());
