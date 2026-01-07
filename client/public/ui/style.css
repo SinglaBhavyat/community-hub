@@ -1,0 +1,225 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #0a0a0a;
+    color: #e2e8f0;
+    transition: background-color 0.3s, color 0.3s;
+}
+.gradient-text {
+    background: linear-gradient(90deg, #38bdf8, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.shiny-button::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+    transform: rotate(45deg);
+    transition: opacity 0.5s ease-out;
+    opacity: 0;
+}
+.shiny-button:hover::after {
+    opacity: 1;
+}
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+}
+.options-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #1e293b; /* slate-800 */
+    border: 1px solid #334155; /* slate-700 */
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    z-index: 10;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    margin-top: 0.5rem;
+}
+.liked {
+    color: #38bdf8; /* sky-400 */
+    font-weight: 600;
+}
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+/* Style for the active link in the secondary navbar */
+.nav-link.active {
+    color: #ffffff;
+    border-bottom: 2px solid #38bdf8;
+}
+/* Style for active RSVP button */
+.rsvp-btn.active {
+    background-color: #38bdf8;
+    color: #ffffff;
+    border-color: #38bdf8;
+}
+
+/* Report Modal Radio Button Styling */
+#report-modal input[type="radio"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #475569; /* slate-600 */
+    margin: 0;
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid #475569;
+    border-radius: 50%;
+    transform: translateY(-0.075em);
+    display: grid;
+    place-content: center;
+    flex-shrink: 0;
+}
+#report-modal input[type="radio"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em #38bdf8; /* sky-400 */
+}
+#report-modal input[type="radio"]:checked::before {
+    transform: scale(1);
+}
+
+
+/* --- AI Chatbot Styles --- */
+#ai-chat-container {
+    background-color: #1e293b; /* slate-800 */
+    transition: background-color 0.3s, color 0.3s;
+}
+#ai-chat-container.light-theme {
+    background-color: #f1f5f9; /* slate-100 */
+    color: #1e293b; /* slate-800 */
+}
+#ai-chat-container.light-theme .ai-chat-header {
+    background-color: #ffffff;
+    border-bottom-color: #e2e8f0; /* slate-200 */
+}
+#ai-chat-container.light-theme .ai-chat-header h3,
+#ai-chat-container.light-theme .ai-chat-header button {
+     color: #1e293b; /* slate-800 */
+}
+#ai-chat-container.light-theme .ai-chat-messages {
+    background-color: #f8fafc; /* slate-50 */
+}
+#ai-chat-container.light-theme .ai-user-bubble {
+    background-color: #38bdf8; /* sky-400 */
+    color: #ffffff;
+}
+#ai-chat-container.light-theme .ai-bot-bubble {
+    background-color: #e2e8f0; /* slate-200 */
+    color: #1e293b; /* slate-800 */
+}
+#ai-chat-container.light-theme .ai-chat-input-form {
+     background-color: #ffffff;
+     border-top-color: #e2e8f0; /* slate-200 */
+}
+#ai-chat-container.light-theme #ai-chat-input {
+    background-color: #f1f5f9; /* slate-100 */
+    color: #1e293b; /* slate-800 */
+    border-color: #cbd5e1; /* slate-300 */
+}
+
+/* --- Light Theme Styles --- */
+body.light-theme {
+    background-color: #f8fafc; /* slate-50 */
+    color: #1e293b; /* slate-800 */
+}
+/* Header */
+body.light-theme #header {
+    background-color: #ffffff/80;
+    border-bottom: 1px solid #e2e8f0; /* slate-200 */
+}
+body.light-theme #header h1,
+body.light-theme #header-user-name {
+    color: #1e293b;
+}
+body.light-theme #theme-toggle-btn {
+    color: #64748b; /* slate-500 */
+}
+body.light-theme #theme-toggle-btn:hover {
+    color: #1e293b; /* slate-800 */
+    background-color: #f1f5f9; /* slate-100 */
+}
+/* Secondary Nav */
+body.light-theme #secondary-navbar {
+    background-color: #ffffff/90;
+    border-bottom-color: #e2e8f0; /* slate-200 */
+}
+body.light-theme .nav-link {
+    color: #64748b; /* slate-500 */
+}
+body.light-theme .nav-link:hover {
+    color: #0f172a; /* slate-900 */
+}
+body.light-theme .nav-link.active {
+    color: #0f172a; /* slate-900 */
+}
+/* General Cards & Forms */
+body.light-theme .bg-slate-900\/50, 
+body.light-theme #page-lost-found, 
+body.light-theme #page-help,
+body.light-theme #report-modal > div {
+    background-color: #ffffff;
+}
+body.light-theme .border-slate-800 { border-color: #e2e8f0; }
+body.light-theme .text-white { color: #1e293b; }
+body.light-theme .text-slate-300 { color: #475569; }
+body.light-theme .text-slate-400 { color: #64748b; }
+body.light-theme .text-slate-500 { color: #64748b; }
+/* Inputs & Buttons */
+body.light-theme .bg-slate-800, body.light-theme .bg-slate-900 { background-color: #f1f5f9; }
+body.light-theme .border-slate-700 { border-color: #cbd5e1; }
+body.light-theme input, body.light-theme textarea, body.light-theme select { color: #1e293b; }
+body.light-theme ::placeholder { color: #94a3b8; }
+body.light-theme #header-guest-view a { background-color: #e2e8f0; color: #1e293b; }
+body.light-theme #header-guest-view a:hover { background-color: #cbd5e1; }
+/* Dropdown Menu */
+body.light-theme .options-dropdown {
+    background-color: #ffffff;
+    border-color: #e2e8f0;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+body.light-theme .options-dropdown .border-slate-700 { border-color: #f1f5f9; }
+body.light-theme .options-dropdown li a, body.light-theme .options-dropdown li button { color: #334155; }
+body.light-theme .options-dropdown li a:hover, body.light-theme .options-dropdown li button:hover { background-color: #f1f5f9; }
+body.light-theme .options-dropdown .text-red-400 { color: #ef4444; }
+body.light-theme .options-dropdown .text-yellow-400 { color: #f59e0b; }
+/* Home page nav links */
+body.light-theme #main-nav-links a { background-color: #ffffff; border-color: #e2e8f0; }
+body.light-theme #main-nav-links a:hover { background-color: #f8fafc; border-color: #38bdf8; }
+/* Chat Page */
+body.light-theme #page-chat .bg-slate-900\/50 { background-color: #f8fafc; }
+body.light-theme .chat-user-item:hover { background-color: #f1f5f9; }
+body.light-theme .chat-user-item.bg-sky-500\/20 { background-color: #e0f2fe; }
+body.light-theme .chat-options-dropdown { background-color: #ffffff; border-color: #e2e8f0; }
+body.light-theme .chat-options-dropdown li button:hover { background-color: #f1f5f9; }
+body.light-theme .message-bubble-content.bg-slate-700 { background-color: #e2e8f0; color: #1e293b; }
+body.light-theme #chat-reply-preview { background-color: #f1f5f9; }
+/* Post feed filter bar */
+body.light-theme #tag-filter-status { background-color: #f1f5f9; border-color: #e2e8f0; }
+body.light-theme #tag-filter-status button:hover { color: #1e293b; }
+/* Help page FAQ */
+body.light-theme .faq-question svg { color: #94a3b8; }
+body.light-theme #page-help .bg-slate-900 { background-color: #f1f5f9; }
+/* Event RSVP buttons */
+body.light-theme .rsvp-btn.active {
+     background-color: #38bdf8;
+     color: #ffffff;
+}
+/* Footer */
+body.light-theme footer { background-color: #ffffff; border-top-color: #e2e8f0; }
+
+

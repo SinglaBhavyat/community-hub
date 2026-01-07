@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Hub</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="antialiased">
+
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-sm transition-all duration-300">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="#" data-target="page-home" class="flex items-center space-x-2">
+                    <svg class="h-8 w-8 text-sky-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <h1 class="text-xl font-bold text-white">Community Hub</h1>
+                </a>
+
+                <div class="flex items-center">
+                    <button id="theme-toggle-btn" class="text-slate-400 hover:text-white p-2 rounded-full transition-colors duration-300 mr-4">
+                    </button>
+                    <div id="header-guest-view">
+                        <a href="#" data-target="page-login" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold py-2 px-5 rounded-full transition-colors duration-300">Login</a>
+                    </div>
+                    <div id="header-auth-view" class="hidden items-center gap-4">
+                        <div class="relative">
+                            <button id="profile-dropdown-btn" class="flex items-center gap-2">
+                                <span id="header-user-name" class="font-semibold text-white hidden sm:block"></span>
+                                <div id="header-avatar" class="w-9 h-9 rounded-full bg-sky-500 border-2 border-slate-700 overflow-hidden"></div>
+                            </button>
+                            <div id="profile-dropdown-menu" class="options-dropdown hidden w-48">
+                                <div class="px-3 py-2 border-b border-slate-700">
+                                    <p class="font-bold text-white truncate" id="dropdown-user-name"></p>
+                                    <p class="text-xs text-slate-500 truncate" id="dropdown-user-username"></p>
+                                    <p class="text-xs text-slate-400 truncate" id="dropdown-user-email"></p>
+                                </div>
+                                <ul class="py-1">
+                                    <li><a href="#" data-target="page-profile" class="block w-full text-left px-3 py-1.5 text-sm text-slate-300 hover:bg-slate-700/50 rounded-md">My Profile</a></li>
+                                    <li><a href="#" data-target="page-my-posts" class="block w-full text-left px-3 py-1.5 text-sm text-slate-300 hover:bg-slate-700/50 rounded-md">My Posts</a></li>
+                                    <li><a href="#" data-target="page-achievements" class="block w-full text-left px-3 py-1.5 text-sm text-slate-300 hover:bg-slate-700/50 rounded-md">Achievements</a></li>
+                                    <li id="admin-panel-link" class="hidden"><a href="#" data-target="page-admin" class="block w-full text-left px-3 py-1.5 text-sm text-yellow-400 hover:bg-slate-700/50 rounded-md">Admin Panel</a></li>
+                                    <li><hr class="border-slate-700 my-1"></li>
+                                    <li><button id="logout-btn" class="w-full text-left px-3 py-1.5 text-sm text-red-400 hover:bg-slate-700/50 rounded-md">Logout</button></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav id="secondary-navbar" class="hidden sticky top-[68px] z-40 bg-black/50 backdrop-blur-sm border-b border-slate-800">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-center gap-6 md:gap-8 h-14">
+                 <a href="#" data-target="page-posts" class="nav-link py-4 text-slate-400 hover:text-white font-medium transition-colors">Posts</a>
+                 <a href="#" data-target="page-create" class="nav-link py-4 text-slate-400 hover:text-white font-medium transition-colors">Create</a>
+                 <a href="#" data-target="page-lost-found" class="nav-link py-4 text-slate-400 hover:text-white font-medium transition-colors">Lost & Found</a>
+                 <a href="#" data-target="page-chat" class="nav-link py-4 text-slate-400 hover:text-white font-medium transition-colors">Chat</a>
+                 <a href="#" data-target="page-help" class="nav-link py-4 text-slate-400 hover:text-white font-medium transition-colors">Help</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-20"> 
+        
+        <section id="page-login" class="page-section min-h-screen flex items-center justify-center py-12">
+            <div class="container mx-auto px-6 max-w-md">
+                <div class="bg-slate-900/50 border border-slate-800 rounded-2xl p-8 md:p-12 text-center">
+                    <h2 class="text-3xl font-bold text-white mb-4">Welcome Back!</h2>
+                    <p class="text-slate-400 mb-8">Log in to continue to the Community Hub.</p>
+                    <form id="login-form" class="space-y-6">
+                        <div>
+                             <input type="email" name="email" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="Email Address" required>
+                        </div>
+                        <div>
+                             <input type="password" name="password" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="Password" required>
+                        </div>
+                         <p id="login-error" class="text-red-400 text-sm hidden"></p>
+                        <button type="submit" class="w-full shiny-button relative overflow-hidden bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-8 rounded-full transition-all duration-300">
+                            Login
+                        </button>
+                    </form>
+                    <p class="text-sm text-slate-400 mt-8">
+                        Don't have an account? <a href="#" data-target="page-signup" class="font-semibold text-sky-400 hover:text-sky-300">Sign Up</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-signup" class="page-section hidden min-h-screen flex items-center justify-center py-12">
+            <div class="container mx-auto px-6 max-w-md">
+                <div class="bg-slate-900/50 border border-slate-800 rounded-2xl p-8 md:p-12 text-center">
+                    <h2 class="text-3xl font-bold text-white mb-4">Create Account</h2>
+                    <p class="text-slate-400 mb-8">Join the hub and connect with your community!</p>
+                    <form id="signup-form" class="space-y-6">
+                        <div>
+                            <input type="text" name="name" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="Full Name" required>
+                        </div>
+                        <div>
+                            <input type="text" name="username" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="Username (e.g., jane_doe)" required>
+                        </div>
+                        <div>
+                            <input type="email" name="email" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="Email Address" required>
+                        </div>
+                        <div>
+                            <input type="password" name="password" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="Password" required>
+                        </div>
+                         <p id="signup-error" class="text-red-400 text-sm hidden"></p>
+                        <button type="submit" class="w-full shiny-button relative overflow-hidden bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-8 rounded-full transition-all duration-300">
+                            Create Account
+                        </button>
+                    </form>
+                    <p class="text-sm text-slate-400 mt-8">
+                        Already have an account? <a href="#" data-target="page-login" class="font-semibold text-sky-400 hover:text-sky-300">Log In</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-home" class="page-section hidden min-h-screen flex items-center pt-8 pb-12 relative overflow-hidden">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                <div class="w-96 h-96 sm:w-[32rem] sm:h-[32rem] lg:w-[48rem] lg:h-[48rem] bg-sky-500/10 rounded-full blur-3xl"></div>
+            </div>
+            <div class="container mx-auto px-6 text-center relative z-10">
+                <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-4 text-white">
+                    Connecting Our <span class="gradient-text">Community</span> Together
+                </h2>
+                <p class="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto mb-8">
+                    Your central place for posts, finding lost items, chatting with neighbors, and getting help.
+                </p>
+                <div id="main-nav-links" class="hidden grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 max-w-5xl mx-auto mb-12">
+                    <a href="#" data-target="page-create" class="bg-slate-900/50 p-6 rounded-xl border border-slate-800 text-center hover:border-sky-500 hover:bg-slate-900 transition-all duration-300 transform hover:-translate-y-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 mb-3 mx-auto text-sky-400">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <h3 class="font-semibold text-lg text-white">Create</h3>
+                    </a>
+                    <a href="#" data-target="page-posts" class="bg-slate-900/50 p-6 rounded-xl border border-slate-800 text-center hover:border-sky-500 hover:bg-slate-900 transition-all duration-300 transform hover:-translate-y-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 mb-3 mx-auto text-sky-400">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 18V7.125C4.5 6.504 5.004 6 5.625 6H9"></path>
+                        </svg>
+                        <h3 class="font-semibold text-lg text-white">Posts</h3>
+                    </a>
+                    <a href="#" data-target="page-lost-found" class="bg-slate-900/50 p-6 rounded-xl border border-slate-800 text-center hover:border-sky-500 hover:bg-slate-900 transition-all duration-300 transform hover:-translate-y-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 mb-3 mx-auto text-sky-400">
+                           <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"></path>
+                        </svg>
+                        <h3 class="font-semibold text-lg text-white">Lost & Found</h3>
+                    </a>
+                    <a href="#" data-target="page-chat" class="bg-slate-900/50 p-6 rounded-xl border border-slate-800 text-center hover:border-sky-500 hover:bg-slate-900 transition-all duration-300 transform hover:-translate-y-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 mb-3 mx-auto text-sky-400">
+                           <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457.163-.92.181-1.397A8.964 8.964 0 012.25 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"></path>
+                        </svg>
+                        <h3 class="font-semibold text-lg text-white">Chat</h3>
+                    </a>
+                    <a href="#" data-target="page-help" class="bg-slate-900/50 p-6 rounded-xl border border-slate-800 text-center hover:border-sky-500 hover:bg-slate-900 transition-all duration-300 transform hover:-translate-y-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 mb-3 mx-auto text-sky-400">
+                           <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"></path>
+                        </svg>
+                        <h3 class="font-semibold text-lg text-white">Help</h3>
+                    </a>
+                </div>
+                <a href="#" data-target="page-posts" class="shiny-button relative overflow-hidden inline-block bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 shadow-lg shadow-sky-500/20 transform hover:scale-105">
+                    Explore Posts
+                </a>
+            </div>
+        </section>
+        
+        <section id="page-profile" class="page-section hidden py-12">
+            <div class="container mx-auto px-6 max-w-2xl">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold text-white">My Profile</h3>
+                    <p class="text-slate-400 mt-2">View and manage your account details.</p>
+                </div>
+                <div class="bg-slate-900/50 p-8 rounded-xl border border-slate-800">
+                    <div class="flex flex-col sm:flex-row items-center gap-6 mb-8">
+                        <div class="relative group">
+                            <div id="profile-page-avatar" class="w-24 h-24 rounded-full bg-sky-500 border-4 border-slate-700 flex-shrink-0 overflow-hidden"></div>
+                            <label for="profile-pic-input" class="absolute inset-0 bg-black/50 rounded-full flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer" title="Change profile picture">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2-2H5a2 2 0 01-2-2V9z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                            </label>
+                            <input type="file" id="profile-pic-input" class="hidden" accept="image/*">
+                        </div>
+                        <div class="text-center sm:text-left">
+                            <h4 id="profile-page-name" class="text-2xl font-bold text-white"></h4>
+                            <p id="profile-page-username" class="text-slate-500"></p>
+                            <p id="profile-page-email" class="text-slate-400"></p>
+                        </div>
+                    </div>
+                    <form id="profile-update-form" class="space-y-4">
+                        <div>
+                            <label for="profile-update-name" class="block text-sm font-medium text-slate-300 mb-2">Display Name</label>
+                            <input type="text" id="profile-update-name" name="name" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500" required>
+                        </div>
+                        <div class="text-right">
+                             <p id="profile-update-success" class="text-green-400 text-sm hidden text-left"></p>
+                            <button type="submit" class="shiny-button relative overflow-hidden inline-block bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-6 rounded-full transition-all duration-300">
+                                Save Changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-my-posts" class="page-section hidden py-12">
+            <div class="container mx-auto px-6">
+                 <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold text-white">My Posts</h3>
+                    <p class="text-slate-400 mt-2">A collection of all your contributions to the hub.</p>
+                </div>
+                <div id="my-posts-feed" class="max-w-3xl mx-auto space-y-8">
+                </div>
+            </div>
+        </section>
+
+        <section id="page-user-profile" class="page-section hidden py-12">
+            <div class="container mx-auto px-6 max-w-3xl">
+                <div class="mb-8">
+                    <button onclick="history.back()" class="inline-flex items-center gap-2 text-sky-400 hover:text-sky-300 font-semibold transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                        </svg>
+                        Back
+                    </button>
+                </div>
+                <div class="bg-slate-900/50 p-8 rounded-xl border border-slate-800 mb-8">
+                    <div class="flex flex-col sm:flex-row items-center gap-6">
+                        <div id="user-profile-page-avatar" class="w-24 h-24 rounded-full bg-pink-500 border-4 border-slate-700 flex-shrink-0 overflow-hidden"></div>
+                        <div class="text-center sm:text-left">
+                            <h4 id="user-profile-page-name" class="text-2xl font-bold text-white"></h4>
+                            <p id="user-profile-page-username" class="text-slate-500"></p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold text-white mb-6" id="user-profile-posts-title"></h3>
+                    <div id="user-profile-posts-feed" class="space-y-8">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-achievements" class="page-section hidden py-12">
+            <div class="container mx-auto px-6">
+                 <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold text-white">My Achievements</h3>
+                    <p class="text-slate-400 mt-2">Celebrating your journey in our community!</p>
+                </div>
+                <div id="achievements-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                </div>
+            </div>
+        </section>
+        
+        <section id="page-create" class="page-section hidden py-12">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold text-white">Create a New Post</h3>
+                    <p class="text-slate-400 mt-2">Share something with the community.</p>
+                </div>
+                <div class="max-w-2xl mx-auto bg-slate-900/50 p-8 rounded-xl border border-slate-800">
+                    <div class="flex border border-slate-700 rounded-lg p-1 mb-8 bg-slate-800">
+                        <button id="select-general-post" class="w-1/3 p-2 rounded-md text-sm font-semibold bg-sky-500 text-white transition-colors">General</button>
+                        <button id="select-event-post" class="w-1/3 p-2 rounded-md text-sm font-semibold text-slate-400 transition-colors">Event</button>
+                        <button id="select-lost-found" class="w-1/3 p-2 rounded-md text-sm font-semibold text-slate-400 transition-colors">Lost & Found</button>
+                    </div>
+
+                    <div id="form-general-post">
+                        <form class="space-y-6">
+                            <div>
+                                <label for="post-title" class="block text-sm font-medium text-slate-300 mb-2">Title</label>
+                                <input type="text" id="post-title" name="post-title" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-sky-500 transition-colors" placeholder="What's the title of your post?" required>
+                            </div>
+                            <div>
+                                <label for="post-category" class="block text-sm font-medium text-slate-300 mb-2">Category</label>
+                                <select id="post-category" name="post-category" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-sky-500 transition-colors" required>
+                                    <option value="" disabled selected>Select a category...</option>
+                                    <option value="Recruitment">Recruitment</option>
+                                    <option value="Need Advice">Need Advice</option>
+                                    <option value="Promotion">Promotion</option>
+                                    <option value="Awareness">Awareness</option>
+                                    <option value="Discussion">Discussion</option>
+                                    <option value="Achievements">Achievements</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="post-content" class="block text-sm font-medium text-slate-300 mb-2">Content</label>
+                                <textarea id="post-content" name="post-content" rows="6" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-sky-500 transition-colors" placeholder="Write your post content here..." required></textarea>
+                            </div>
+                            <div>
+                                <label for="post-tags" class="block text-sm font-medium text-slate-300 mb-2">Tags (comma-separated)</label>
+                                <input type="text" id="post-tags" name="post-tags" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-sky-500 transition-colors" placeholder="e.g., #jobs, #safety, #announcement">
+                            </div>
+                             <div>
+                                <button type="button" id="add-poll-btn" class="w-full flex items-center justify-center gap-2 text-sm font-semibold text-sky-400 hover:text-sky-300 bg-slate-800 border border-slate-700 rounded-lg p-3 transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" />
+                                        <path d="M12 2.252A8.014 8.014 0 0117.748 12H12V2.252z" />
+                                    </svg>
+                                    Create Poll
+                                </button>
+                            </div>
+                            <div id="poll-creator-container" class="hidden space-y-4 p-4 border border-slate-700 rounded-lg bg-slate-800/50">
+                                <div class="flex justify-between items-center">
+                                    <label class="block text-sm font-medium text-slate-300">Poll Options</label>
+                                    <button type="button" id="remove-poll-btn" class="text-xs font-semibold text-red-400 hover:text-red-300">Remove Poll</button>
+                                </div>
+                                <div id="poll-options-inputs" class="space-y-3">
+                                    </div>
+                                <button type="button" id="add-poll-option-btn" class="w-full text-sm font-semibold text-slate-400 hover:text-white bg-slate-700/50 py-2 rounded-lg transition-colors">+ Add Option</button>
+                            </div>
+                             <div>
+                                <label class="block text-sm font-medium text-slate-300 mb-2">Attach a Photo (Optional)</label>
+                                <div class="mt-2 flex justify-center rounded-lg border border-dashed border-slate-700 px-6 py-10">
+                                    <div class="text-center">
+                                        <svg class="mx-auto h-12 w-12 text-slate-500" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12A2.25 2.25 0 0120.25 20.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" /></svg>
+                                        <div class="mt-4 flex text-sm leading-6 text-slate-400"><label for="post-photo" class="relative cursor-pointer rounded-md font-semibold text-sky-400 focus-within:outline-none focus-within:ring-2 focus-within:ring-sky-500 focus-within:ring-offset-2 focus-within:ring-offset-slate-900 hover:text-sky-500"><span>Upload a file</span><input id="post-photo" name="post-photo" type="file" class="sr-only" accept="image/*"></label><p class="pl-1">or drag and drop</p></div>
+                                        <p class="text-xs leading-5 text-slate-500">PNG, JPG, GIF up to 10MB</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="post-photo-preview" class="hidden"></div>
+                            <div class="text-right">
+                                <button type="submit" class="shiny-button relative overflow-hidden inline-block bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-6 rounded-full transition-all duration-300 shadow-lg shadow-sky-500/20 transform hover:scale-105">
+                                    Submit Post
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="form-event" class="hidden">
+                        <form class="space-y-6">
+                            <div>
+                                <label for="event-title" class="block text-sm font-medium text-slate-300 mb-2">Event Title</label>
+                                <input type="text" id="event-title" name="event-title" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="e.g., Annual Community BBQ" required>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="event-date" class="block text-sm font-medium text-slate-300 mb-2">Date</label>
+                                    <input type="date" id="event-date" name="event-date" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-sky-500" required>
+                                </div>
+                                <div>
+                                    <label for="event-time" class="block text-sm font-medium text-slate-300 mb-2">Time</label>
+                                    <input type="time" id="event-time" name="event-time" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-sky-500" required>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="event-location" class="block text-sm font-medium text-slate-300 mb-2">Location</label>
+                                <input type="text" id="event-location" name="event-location" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="e.g., Community Park Pavilion" required>
+                            </div>
+                            <div>
+                                <label for="event-content" class="block text-sm font-medium text-slate-300 mb-2">Description</label>
+                                <textarea id="event-content" name="event-content" rows="4" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="Provide more details about the event..." required></textarea>
+                            </div>
+                             <div>
+                                <label for="event-tags" class="block text-sm font-medium text-slate-300 mb-2">Tags (comma-separated)</label>
+                                <input type="text" id="event-tags" name="event-tags" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="e.g., #social, #family, #food">
+                            </div>
+                             <div>
+                                <label class="block text-sm font-medium text-slate-300 mb-2">Attach a Photo (Optional)</label>
+                                <div class="mt-2 flex justify-center rounded-lg border border-dashed border-slate-700 px-6 py-10">
+                                    <div class="text-center">
+                                        <svg class="mx-auto h-12 w-12 text-slate-500" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12A2.25 2.25 0 0120.25 20.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" /></svg>
+                                        <div class="mt-4 flex text-sm leading-6 text-slate-400"><label for="event-photo" class="relative cursor-pointer rounded-md font-semibold text-sky-400 hover:text-sky-500"><span>Upload a file</span><input id="event-photo" name="event-photo" type="file" class="sr-only" accept="image/*"></label><p class="pl-1">or drag and drop</p></div>
+                                        <p class="text-xs leading-5 text-slate-500">PNG, JPG, GIF</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="event-photo-preview" class="hidden"></div>
+                            <div class="text-right">
+                                <button type="submit" class="shiny-button relative overflow-hidden inline-block bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-6 rounded-full transition-all duration-300 shadow-lg shadow-indigo-500/20 transform hover:scale-105">
+                                    Create Event
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="form-lost-found" class="hidden">
+                         <form class="space-y-6">
+                            <div>
+                                <label for="item-name" class="block text-sm font-medium text-slate-300 mb-2">Item Name</label>
+                                <input type="text" id="item-name" name="item-name" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-sky-500 transition-colors" placeholder="e.g., Black Leather Wallet, Set of Keys">
+                            </div>
+                            <div>
+                               <label for="item-status" class="block text-sm font-medium text-slate-300 mb-2">Status</label>
+                               <select id="item-status" name="item-status" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-sky-500 transition-colors">
+                                 <option>Lost</option>
+                                 <option>Found</option>
+                               </select>
+                            </div>
+                            <div>
+                                <label for="item-description" class="block text-sm font-medium text-slate-300 mb-2">Description</label>
+                                <textarea id="item-description" name="item-description" rows="4" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-sky-500 transition-colors" placeholder="Provide details like where you lost/found it, identifying features, etc."></textarea>
+                            </div>
+                             <div>
+                                <label class="block text-sm font-medium text-slate-300 mb-2">Attach a Photo (Optional)</label>
+                                <div class="mt-2 flex justify-center rounded-lg border border-dashed border-slate-700 px-6 py-10">
+                                    <div class="text-center">
+                                        <svg class="mx-auto h-12 w-12 text-slate-500" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12A2.25 2.25 0 0120.25 20.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" /></svg>
+                                        <div class="mt-4 flex text-sm leading-6 text-slate-400"><label for="item-photo" class="relative cursor-pointer rounded-md font-semibold text-sky-400 focus-within:outline-none focus-within:ring-2 focus-within:ring-sky-500 focus-within:ring-offset-2 focus-within:ring-offset-slate-900 hover:text-sky-500"><span>Upload a file</span><input id="item-photo" name="item-photo" type="file" class="sr-only" accept="image/*"></label><p class="pl-1">or drag and drop</p></div>
+                                        <p class="text-xs leading-5 text-slate-500">PNG, JPG, GIF up to 10MB</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="item-photo-preview" class="hidden"></div>
+                            <div class="text-right">
+                                <button type="submit" class="shiny-button relative overflow-hidden inline-block bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-6 rounded-full transition-all duration-300 shadow-lg shadow-indigo-500/20 transform hover:scale-105">
+                                    Submit Item
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-posts" class="page-section hidden py-12">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold text-white">Community Feed</h3>
+                    <p class="text-slate-400 mt-2">Echoes from the heart of our community.</p>
+                </div>
+                
+                <div class="max-w-3xl mx-auto mb-8">
+                    <div id="tag-filter-status" class="hidden mb-4 p-4 bg-slate-800 border border-slate-700 rounded-lg flex justify-between items-center">
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <div class="flex-grow">
+                            <label for="category-filter-select" class="block text-sm font-medium text-slate-400 mb-1">Filter by Category</label>
+                            <select id="category-filter-select" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-sky-500">
+                                <option value="all">All Categories</option>
+                                <option value="Recruitment">Recruitment</option>
+                                <option value="Need Advice">Need Advice</option>
+                                <option value="Promotion">Promotion</option>
+                                <option value="Awareness">Awareness</option>
+                                <option value="Discussion">Discussion</option>
+                                <option value="Achievements">Achievements</option>
+                                <option value="Event">Event</option>
+                            </select>
+                        </div>
+                        <div class="flex-grow">
+                             <label for="sort-select" class="block text-sm font-medium text-slate-400 mb-1">Sort by</label>
+                            <select id="sort-select" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-sky-500">
+                                <option value="recent">Most Recent</option>
+                                <option value="upvoted">Most Upvoted</option>
+                                <option value="comments">Most Comments</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="posts-feed" class="max-w-3xl mx-auto space-y-8">
+                </div>
+            </div>
+        </section>
+
+        <section id="page-comments" class="page-section hidden py-12">
+            <div class="container mx-auto px-6">
+                <div class="max-w-3xl mx-auto">
+                    <div class="mb-8">
+                        <a href="#" data-target="page-posts" class="inline-flex items-center gap-2 text-sky-400 hover:text-sky-300 font-semibold transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                            </svg>
+                            Back to Posts
+                        </a>
+                    </div>
+
+                    <div id="comments-page-post-container" class="mb-8">
+                    </div>
+
+                    <div class="mb-10">
+                        <h3 class="text-xl font-bold text-white mb-4">Add a Comment</h3>
+                        <div id="comments-page-form" class="comment-form flex items-start space-x-3">
+                            <div id="comment-form-avatar" class="w-8 h-8 rounded-full bg-slate-700 flex-shrink-0 overflow-hidden"></div>
+                            <div class="flex-grow">
+                                <textarea class="comment-textarea w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500" rows="3" placeholder="Share your thoughts..."></textarea>
+                                <button class="submit-comment-btn mt-2 bg-sky-500 text-white text-sm font-semibold px-4 py-1.5 rounded-full hover:bg-sky-600 transition-colors">Post Comment</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="border-t border-slate-800 pt-6">
+                        <h3 class="text-xl font-bold text-white mb-6">Comments</h3>
+                        <div id="comments-page-list" class="space-y-6">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-lost-found" class="page-section hidden py-12 bg-slate-900/50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold text-white">Lost & Found</h3>
+                    <p class="text-slate-400 mt-2">Help reunite owners with their lost items.</p>
+                </div>
+                <div id="lost-found-feed" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                </div>
+            </div>
+        </section>
+
+        <section id="page-chat" class="page-section hidden py-12">
+            <div class="container mx-auto px-6">
+                 <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold text-white">Community Chat</h3>
+                    <p class="text-slate-400 mt-2">Connect with your neighbors instantly.</p>
+                </div>
+
+                <div class="max-w-6xl mx-auto bg-slate-900/50 border border-slate-800 rounded-xl h-[70vh] flex">
+                    <div class="w-full md:w-1/3 lg:w-1/4 border-r border-slate-800 flex flex-col">
+                        <div class="p-4 border-b border-slate-800">
+                            <input type="search" id="user-search-input" placeholder="Search users..." class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-sky-500">
+                        </div>
+                        <div id="chat-user-list" class="flex-grow overflow-y-auto">
+                        </div>
+                    </div>
+
+                    <div id="chat-window" class="w-full md:w-2/3 lg:w-3/4 flex-col hidden md:flex">
+                        <div id="chat-conversation-screen" class="hidden flex-grow flex flex-col">
+                            <div id="chat-header" class="p-4 border-b border-slate-800 flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-full bg-pink-500 flex-shrink-0"></div>
+                                <div>
+                                    <h5 class="font-bold text-white"></h5>
+                                    <p class="text-xs text-green-400">Online</p>
+                                </div>
+                            </div>
+                            <div id="chat-messages" class="flex-grow p-4 space-y-2 overflow-y-auto">
+                            </div>
+                            <div class="p-4 border-t border-slate-800">
+                                <div id="chat-reply-preview" class="hidden mb-2 p-2 bg-slate-800 rounded-lg text-sm relative"></div>
+                                <form id="chat-message-form" class="flex items-center space-x-3">
+                                    <input type="text" id="chat-message-input" placeholder="Type a message..." class="w-full bg-slate-800 border border-slate-700 rounded-full py-2 px-4 text-sm text-white focus:outline-none focus:ring-2 focus:ring-sky-500" autocomplete="off">
+                                    <button type="submit" class="bg-sky-500 text-white rounded-full p-2.5 hover:bg-sky-600 transition-colors flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5"><path d="M3.105 2.289a.75.75 0 00-.826.95l1.414 4.949a.75.75 0 00.95.826L11.25 9.25v1.5l-7.5 2.143a.75.75 0 00-.95.826l-1.414 4.949a.75.75 0 00.826.95 28.896 28.896 0 0015.293-7.5a.75.75 0 000-1.214A28.897 28.897 0 003.105 2.289z" /></svg>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-help" class="page-section hidden py-12 bg-slate-900/50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold text-white">Help & Support</h3>
+                    <p class="text-slate-400 mt-2">Find answers to your questions.</p>
+                </div>
+                <div class="max-w-3xl mx-auto">
+                    <div class="mb-8 bg-slate-900 border border-slate-800 rounded-xl p-8 text-center">
+                       <h4 class="text-2xl font-bold text-white mb-3">Need Instant Help?</h4>
+                       <p class="text-slate-400 mb-6">Our AI assistant, Echo, is available 24/7 to help you with your questions about the community and more.</p>
+                       <a href="#" data-target="page-ai-chat" class="shiny-button relative overflow-hidden inline-flex items-center gap-2 bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-8 rounded-full transition-all duration-300">
+                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.076-4.076a1.526 1.526 0 011.037-.443 48.282 48.282 0 005.68-.494c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" /></svg>
+                           Chat with Echo AI
+                       </a>
+                    </div>
+                    <h4 class="text-2xl font-bold text-white text-center mb-6">Frequently Asked Questions</h4>
+                    <div class="space-y-4">
+                        <div class="bg-slate-900 border border-slate-800 rounded-xl"><button class="faq-question w-full text-left p-6 flex justify-between items-center"><span class="text-lg font-semibold text-white">How do I create a new post?</span><svg class="w-6 h-6 text-slate-400 transform transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg></button><div class="faq-answer px-6 pb-6"><p class="text-slate-400">To create a new post, navigate to the "Create" page from the main home page or the top navigation bar. You can then choose to make a "General Post", "Event", or a "Lost & Found" item and fill out the form.</p></div></div>
+                        <div class="bg-slate-900 border border-slate-800 rounded-xl"><button class="faq-question w-full text-left p-6 flex justify-between items-center"><span class="text-lg font-semibold text-white">Can I edit or delete my own posts?</span><svg class="w-6 h-6 text-slate-400 transform transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg></button><div class="faq-answer px-6 pb-6"><p class="text-slate-400">Yes! On any post or Lost & Found item you've created, look for the three-dot menu icon in the top-right corner of the card. Clicking this will give you options to edit or delete your content.</p></div></div>
+                        <div class="bg-slate-900 border border-slate-800 rounded-xl"><button class="faq-question w-full text-left p-6 flex justify-between items-center"><span class="text-lg font-semibold text-white">How do I use the new chat features like reply and edit?</span><svg class="w-6 h-6 text-slate-400 transform transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg></button><div class="faq-answer px-6 pb-6"><p class="text-slate-400">Simply hover your mouse over any message in the chat. A three-dot menu icon will appear. Click on it to see options like "Reply", "Edit" (only on your own messages), and "Delete for Me". On your own messages, you'll also see "Delete for Everyone".</p></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-ai-chat" class="page-section hidden py-12">
+             <div class="container mx-auto px-6">
+                <div id="ai-chat-container" class="max-w-4xl mx-auto rounded-xl border border-slate-800 shadow-2xl h-[80vh] flex flex-col overflow-hidden">
+                    <div class="ai-chat-header p-4 border-b border-slate-700 flex justify-between items-center flex-shrink-0 bg-slate-900/50">
+                        <div class="flex items-center gap-3">
+                             <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-sky-400 to-indigo-500 flex items-center justify-center">
+                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-white"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.076-4.076a1.526 1.526 0 011.037-.443 48.282 48.282 0 005.68-.494c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" /></svg>
+                             </div>
+                             <div>
+                                 <h3 class="font-bold text-lg text-white">Echo AI</h3>
+                                 <p class="text-xs text-green-400">Online</p>
+                             </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                             <button id="ai-theme-toggle" title="Toggle Theme" class="p-2 rounded-full hover:bg-slate-700/50 text-slate-400">
+                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /></svg>
+                             </button>
+                             <button id="ai-new-conversation" title="New Conversation" class="p-2 rounded-full hover:bg-slate-700/50 text-slate-400">
+                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+                             </button>
+                        </div>
+                    </div>
+                    <div id="ai-chat-messages" class="flex-grow p-6 overflow-y-auto bg-slate-800/50 space-y-6">
+                    </div>
+                    <div class="ai-chat-input-form p-4 border-t border-slate-700 flex-shrink-0 bg-slate-900/50">
+                        <form id="ai-chat-form" class="flex items-center gap-3">
+                            <input type="text" id="ai-chat-input" placeholder="Ask Echo anything..." class="w-full bg-slate-800 border border-slate-700 rounded-full py-2.5 px-5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all" autocomplete="off">
+                            <button type="submit" class="bg-sky-500 text-white rounded-full p-3 hover:bg-sky-600 transition-colors flex-shrink-0 disabled:bg-slate-600 disabled:cursor-not-allowed">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18" /></svg>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admin Panel Section -->
+        <section id="page-admin" class="page-section hidden py-12">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold text-white">Admin Panel</h3>
+                    <p class="text-slate-400 mt-2">Manage reported content.</p>
+                </div>
+                <div id="admin-reported-content" class="max-w-4xl mx-auto space-y-6">
+                    <!-- Reported items will be rendered here by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Report Content Modal -->
+    <div id="report-modal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[60] flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl p-8 w-full max-w-md transform transition-all" role="dialog" aria-modal="true">
+            <h3 class="text-xl font-bold text-white mb-4">Report Content</h3>
+            <p class="text-sm text-slate-400 mb-6">Please select a reason for reporting this content. Our moderators will review it shortly.</p>
+            <form id="report-form">
+                <input type="hidden" id="report-content-id" name="contentId">
+                <input type="hidden" id="report-content-type" name="contentType">
+                <div class="space-y-4 mb-8 text-slate-300">
+                    <label class="flex items-center p-3 bg-slate-800 rounded-lg border border-transparent has-[:checked]:border-sky-500 has-[:checked]:bg-sky-500/10 cursor-pointer">
+                        <input type="radio" name="reason" value="Spam" class="w-4 h-4 mr-3" checked> Spam or Advertisement
+                    </label>
+                    <label class="flex items-center p-3 bg-slate-800 rounded-lg border border-transparent has-[:checked]:border-sky-500 has-[:checked]:bg-sky-500/10 cursor-pointer">
+                        <input type="radio" name="reason" value="Inappropriate" class="w-4 h-4 mr-3"> Inappropriate Content
+                    </label>
+                    <label class="flex items-center p-3 bg-slate-800 rounded-lg border border-transparent has-[:checked]:border-sky-500 has-[:checked]:bg-sky-500/10 cursor-pointer">
+                        <input type="radio" name="reason" value="Harassment" class="w-4 h-4 mr-3"> Harassment or Bullying
+                    </label>
+                    <label class="flex items-center p-3 bg-slate-800 rounded-lg border border-transparent has-[:checked]:border-sky-500 has-[:checked]:bg-sky-500/10 cursor-pointer">
+                        <input type="radio" name="reason" value="Misinformation" class="w-4 h-4 mr-3"> Misinformation
+                    </label>
+                </div>
+                <div class="flex justify-end gap-3">
+                    <button type="button" id="cancel-report-btn" class="font-semibold text-slate-300 px-5 py-2 rounded-full hover:bg-slate-800 transition-colors">Cancel</button>
+                    <button type="submit" class="bg-red-500 text-white font-semibold px-5 py-2 rounded-full hover:bg-red-600 transition-colors">Submit Report</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <footer class="bg-slate-900/50 border-t border-slate-800">
+        <div class="container mx-auto px-6 py-8 text-center text-slate-400">
+            <p>&copy; 2025 Community Hub. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
